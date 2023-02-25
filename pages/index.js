@@ -1,8 +1,13 @@
 import Head from 'next/head'
 import Image from 'next/image'
 import LoginPage from '@/components/LoginPage'
+import { useAuth } from '@/context/AuthContext'
+import UserDashboard from '@/components/UserDashboard'
 
 export default function Home() {
+
+  const { currentUser } = useAuth()
+  console.log("currentUser", currentUser)
   return (
     <>
       <Head>
@@ -12,7 +17,8 @@ export default function Home() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <>
-        <LoginPage />
+        {!currentUser && <LoginPage />}
+        {currentUser && <UserDashboard />}
       </>
     </>
   )
